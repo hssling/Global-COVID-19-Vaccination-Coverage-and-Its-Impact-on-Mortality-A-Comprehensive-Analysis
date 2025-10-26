@@ -2,17 +2,40 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from pathlib import Path
+import os
 
 
 st.set_page_config(
     page_title="COVID-19 Global Vaccination Dashboard",
     layout="wide"
 )
-BASE = Path("projects/COVID_vaccination_analysis")
-DATA = BASE/"data"
+
+# Handle different deployment environments
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+
+# Try multiple possible data locations
+possible_paths = [
+    project_root / "data" / "covid_subset.csv",  # Local development
+    current_dir / "data" / "covid_subset.csv",   # Same directory
+    Path("data") / "covid_subset.csv",           # Relative path
+    Path("covid_subset.csv")                     # Direct path
+]
+
+df = None
+for data_path in possible_paths:
+    try:
+        df = pd.read_csv(data_path, parse_dates=["date"])
+        print(f"✅ Successfully loaded data from: {data_path}")
+        break
+    except FileNotFoundError:
+        continue
+
+if df is None:
+    st.error("❌ Could not find covid_subset.csv file. Please ensure data files are in the correct location.")
+    st.stop()
 
 st.title("🌍 COVID-19 Vaccination & Cases Dashboard")
-df = pd.read_csv(DATA/"covid_subset.csv", parse_dates=["date"])
 
 countries = st.multiselect(
     "Select countries",
