@@ -1,0 +1,25 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:             death_rate   R-squared:                       0.027
+Model:                            OLS   Adj. R-squared:                 -0.298
+Method:                 Least Squares   F-statistic:                   0.08255
+Date:                Sun, 26 Oct 2025   Prob (F-statistic):              0.793
+Time:                        18:59:58   Log-Likelihood:                 27.026
+No. Observations:                   5   AIC:                            -50.05
+Df Residuals:                       3   BIC:                            -50.83
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.0024      0.001      2.137      0.122      -0.001       0.006
+vax_rate      -0.0004      0.001     -0.287      0.793      -0.005       0.004
+==============================================================================
+Omnibus:                          nan   Durbin-Watson:                   1.186
+Prob(Omnibus):                    nan   Jarque-Bera (JB):                0.386
+Skew:                          -0.021   Prob(JB):                        0.825
+Kurtosis:                       1.640   Cond. No.                         3.37
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
